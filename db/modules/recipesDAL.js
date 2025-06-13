@@ -32,3 +32,8 @@ exports.update = (id, update) =>
         }
     );
 }
+
+exports.findByQuery = (query) =>
+{
+    return recipes.find(query);
+}

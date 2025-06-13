@@ -8,6 +8,29 @@ router.get("/getAll", async (req, res) =>
     res.send({ success: true, recipes })
 });
 
+// search by attibutes
+router.get("/search", async (req, res) =>
+{
+    try
+    {
+        const recipes = await recipeController.findRecipesByQuery(req.query);
+        
+        if (recipes?.length)
+        {
+            return res.send({ success: true, recipes });
+        }
+        else
+        {
+            return res.sendStatus(404);
+        }
+    }
+    catch (error)
+    {
+        console.log("Error while querying recipes", error);
+        return res.sendStatus(500);
+    }
+})
+
 // get by id
 router.get("/:recipeId", async (req, res) =>
 {
